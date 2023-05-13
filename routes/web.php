@@ -37,9 +37,12 @@ Route::get('/movies', [App\Http\Controllers\MovieController::class, 'index'])->n
 Route::post('/movies', [App\Http\Controllers\MovieController::class, 'store'])->name('movies.store');
 
 Route::get('/movies/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');// routes/web.php
-Route::get('/posts/create', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
+Route::get('/posts/create/{movie_id}', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
 Route::get('/posts/{id}', [App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 
 Route::post('/posts', [App\Http\Controllers\PostController::class, 'store'])->name('posts.store');
 Route::post('/posts/{id}/like', [App\Http\Controllers\PostController::class, 'like'])->name('posts.like');
 Route::post('/posts/{id}/dislike', [App\Http\Controllers\PostController::class, 'dislike'])->name('posts.dislike');
+Route::get('/posts/{id}/{movie_id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
+Route::get('/my-posts', [App\Http\Controllers\PostController::class, 'myPosts'])->name('posts.myPosts');
