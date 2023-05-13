@@ -1,10 +1,13 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+    <title>Login</title>
 </head>
 <body>
-    <h2>Register</h2>
+    <h2>Login</h2>
 
     @if ($errors->any())
         <div>
@@ -16,17 +19,12 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" value="{{ old('name') }}" required autofocus>
-        </div>
-
-        <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus>
         </div>
 
         <div>
@@ -35,13 +33,14 @@
         </div>
 
         <div>
-            <label for="password_confirmation">Confirm Password:</label>
-            <input type="password" id="password_confirmation" name="password_confirmation" required>
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember Me</label>
         </div>
 
         <div>
-            <button type="submit">Register</button>
+            <button type="submit">Login</button>
         </div>
     </form>
 </body>
 </html>
+@endsection

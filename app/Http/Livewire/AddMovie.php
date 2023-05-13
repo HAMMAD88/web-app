@@ -18,11 +18,11 @@ class AddMovie extends Component
 
     public function addMovie()
     {
-        // $this->validate([
-        //     'movieName' => 'required',
-        //     'directorName' => 'required',
-        //     'year' => 'required|numeric',
-        // ]);
+        $this->validate([
+            'movieName' => 'required',
+            'directorName' => 'required',
+            'year' => 'required',
+        ]);
         
         // $validatedData = $this->validate([
         //     'movieName' => 'required',
@@ -55,8 +55,8 @@ class AddMovie extends Component
                 'message' => 'Failed to create model'
             ];
         }
-        
-        return response()->json($response);
+        //return redirect()->to('login');
+        // return response()->json($response);
 
         // Reset the input fields after adding the movie
         $this->reset(['movieName', 'directorName', 'year']);

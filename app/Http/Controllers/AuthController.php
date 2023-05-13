@@ -3,48 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 class AuthController extends Controller
 {
+    // Show the login form
     public function showLoginForm()
     {
-        return view('auth.login2');
+        return view('login');
     }
 
+    // Handle the login request
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard');
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            // Authentication passed
+            return redirect()->intended('/movies');
         }
 
-        return back()->withErrors(['email' => 'Invalid email or password']);
+        return back()->withErrors([
+            'email' => 'Invalid credentials',
+        ])->withInput($request->except('password'));
     }
-
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('register');
     }
 
+    // Handle the registration request
     public function register(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|min:6|max:255',
+        $credentials = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         $user = \App\Models\User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
+            'name' => $credentials['name'],
+            'email' => $credentials['email'],
+            'password' => bcrypt($credentials['password']),
         ]);
-
 
         Auth::login($user);
 
         return redirect('/dashboard');
     }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
 }
-
