@@ -52,7 +52,7 @@ class PostController extends Controller
         $like->user_id = Auth::id();
         $post->likes()->save($like);
         // Send email
-        // \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'like'));
+        \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'like'));
 
         return redirect()->back();
     }
@@ -64,7 +64,7 @@ class PostController extends Controller
         $dislike = new Dislike();
         $dislike->user_id = Auth::id();
         $post->dislikes()->save($dislike);
-        // \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'dislike'));
+         \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'dislike'));
 
         return redirect()->back();
     }
