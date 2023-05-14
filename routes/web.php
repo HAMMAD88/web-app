@@ -35,6 +35,8 @@ Route::post('/register', [App\Http\Controllers\AuthController::class, 'register'
 Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 Route::get('/movies', [App\Http\Controllers\MovieController::class, 'index'])->name('movies.index');
 Route::post('/movies', [App\Http\Controllers\MovieController::class, 'store'])->name('movies.store');
+Route::delete('/movies/{movie}', [App\Http\Controllers\MovieController::class, 'destroy'])->name('movies.destroy')->middleware('auth');
+
 
 Route::get('/movies/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('posts.show');// routes/web.php
 Route::get('/posts/create/{movie_id}', [App\Http\Controllers\PostController::class, 'create'])->name('posts.create');
@@ -46,3 +48,5 @@ Route::post('/posts/{id}/dislike', [App\Http\Controllers\PostController::class, 
 Route::get('/posts/{id}/{movie_id}/edit', [App\Http\Controllers\PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('posts.update');
 Route::get('/my-posts', [App\Http\Controllers\PostController::class, 'myPosts'])->name('posts.myPosts');
+Route::delete('/posts/{id}/{movie_id}', [App\Http\Controllers\PostController::class, 'delete'])->name('posts.delete');
+

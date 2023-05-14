@@ -49,6 +49,15 @@
             @if (Auth::id() == $post->user_id)
            <a href="{{ route('posts.edit', ['id' => $post->id, 'movie_id' => $movie_id]) }}">Edit Post</a>
             @endif
+            @if (Auth::id() == $post->user_id)
+
+           <form method="POST" action="{{ route('posts.delete', ['id' => $post->id, 'movie_id' => $movie_id]) }}">
+            @csrf
+            @method('DELETE')
+
+           <button type="submit">Delete Post</button>
+           </form>
+            @endif
 
             <form method="POST" action="{{ route('posts.like', $post->id) }}">
                 @csrf

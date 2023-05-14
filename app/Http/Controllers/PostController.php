@@ -128,6 +128,18 @@ public function myPosts()
     $posts = Auth::user()->posts;
     return view('posts.myPosts', ['posts' => $posts]);
 }
+public function delete($id, $movie_id)
+{
+    $post = Post::findOrFail($id);
+
+    // Ensure the authenticated user is the owner of the post
+    if (Auth::id() == $post->user_id) {
+        $post->delete();
+    }
+
+    return redirect()->route('posts.index', ['id' => $movie_id]);
+}
+
 
     
 }

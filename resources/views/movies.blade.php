@@ -113,11 +113,24 @@
     <h2 class="movie-title">{{ $movie->movie_name }}</h2>
     <p class="movie-info"><strong>Directed by:</strong> {{ $movie->director }}</p>
     <p class="movie-info"><strong>Year:</strong> {{ $movie->year }}</p>
+    @if (Auth::user()->name == 'Hammad')
+        <form action="{{ route('movies.destroy', $movie) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+        </form>
+    @endif
 </div>
 </div>
         </a>
         @endforeach
     </div>
+    <style>
+    .form-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 60px auto; /* auto will center the box horizontally */
+} </style>
 
     <div class="form-container">
         <form method="POST" action="{{ route('movies.store') }}" enctype="multipart/form-data">
@@ -147,6 +160,18 @@
             </div>
         </form>
     </div>
+    @if ($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
     <script>
         document.getElementById('search').addEventListener('input', function(e) {
@@ -164,4 +189,8 @@
             });
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 @endsection

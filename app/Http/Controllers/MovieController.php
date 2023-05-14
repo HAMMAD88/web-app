@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Poster;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resource\MovieResource;
 class MovieController extends Controller
 {
     public function index()
@@ -16,17 +18,13 @@ class MovieController extends Controller
     }
     public function store(Request $request)
     {
-        // $movie = new Movie;
-        // $movie->movie_name = $request->movie_name;
-        // $movie->director = $request->director;
-        // $movie->year = $request->year;
-        // $movie->save();
+        
         
         $validatedData = $request->validate([
             'movie_name' => 'required',
             'director' => 'required',
-            'year' => 'required',
-            // 'poster' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'year' => 'required|integer|min:1888|max:'.date('Y'),
+            'poster' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
         $movie = Movie::create($validatedData);
@@ -44,4 +42,18 @@ class MovieController extends Controller
         return redirect()->route('movies.index');
         
     }
+    public function destroy(Movie $movie)
+{
+    // Check if the authenticated user is an admin
+    if (Auth::user()->name == 'Hammad') {
+        $movie->delete();
+
+        return redirect()->route('movies.index')->with('success', 'Movie deleted successfully');
+    } else {
+        return redirect()->route('movies.index')->with('error', 'You do not have permission to delete movies');
+    }
+}
+
+
+
 }
