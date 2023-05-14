@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Movie;
 use App\Models\Like;
 use App\Models\Dislike;
+use App\Services\MailService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
@@ -44,7 +45,7 @@ class PostController extends Controller
         return redirect()->route('posts.index', ['id' => $validatedData['movie_id']]);
     }
 
-    public function like($id)
+    public function like($id,MailService $mailService)
     {
         $post = Post::find($id);
 
@@ -52,19 +53,21 @@ class PostController extends Controller
         $like->user_id = Auth::id();
         $post->likes()->save($like);
         // Send email
-        \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'like'));
+        // \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'like'));
+        $mailService->sendPostReactedMail($post->user, $post,'like');
 
         return redirect()->back();
     }
 
-    public function dislike($id)
+    public function dislike($id,MailService $mailService)
     {
         $post = Post::find($id);
 
         $dislike = new Dislike();
         $dislike->user_id = Auth::id();
         $post->dislikes()->save($dislike);
-         \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'dislike'));
+        //  \Mail::to($post->user)->send(new \App\Mail\PostReacted($post, 'dislike'));
+        $mailService->sendPostReactedMail($post->user, $post, 'dislike');
 
         return redirect()->back();
     }
