@@ -30,19 +30,34 @@ class PostController extends Controller
         return view('posts.create',compact('movie_id'));
     }
 
+    // public function store(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'text' => 'required|max:255',
+    //     ]);
+
+    //     $validatedData['user_id'] = Auth::id();
+    //     $validatedData['movie_id'] = $request->input('movie_id');
+
+    //     Post::create($validatedData);
+
+    //     // return redirect()->route('posts.index',['id' => 54]);
+    //     return redirect()->route('posts.index', ['id' => $validatedData['movie_id']]);
+    // }
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'text' => 'required|max:255',
-        ]);
+    $validatedData = $request->validate([
+        'text' => 'required|max:255',
+    ]);
 
-        $validatedData['user_id'] = Auth::id();
-        $validatedData['movie_id'] = $request->input('movie_id');
+    $validatedData['user_id'] = Auth::id();
+    $validatedData['movie_id'] = $request->input('movie_id');
 
-        Post::create($validatedData);
-
-        // return redirect()->route('posts.index',['id' => 54]);
-        return redirect()->route('posts.index', ['id' => $validatedData['movie_id']]);
+    Post::create($validatedData);
+    return redirect()->route('posts.index', ['id' => $validatedData['movie_id']]);
+    // return response()->json(['message' => 'Post created successfully']);
+    //return response()->json(['movie_id' => $validatedData['movie_id']]);
+    
     }
 
     public function like($id,MailService $mailService)
