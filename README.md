@@ -3,22 +3,28 @@ Its a simple website built in laravel that allows users to add movies. Users can
 Here are some use cases of the website.
 User can login.
 
-![Login](https://github.com/HAMMAD88/web-app/assets/58599091/2b443354-65a1-4b9b-9d69-a96b4600f231)
+![Login](https://github.com/HAMMAD88/web-app/assets/58599091/70dc06e1-db7f-442b-abbe-94d2f0aab6a4)
+
  If the user does not exist register.
 
-![Register](https://github.com/HAMMAD88/web-app/assets/58599091/4760a18f-79ce-46f9-bb42-a6c96fb841a2)
+![Register](https://github.com/HAMMAD88/web-app/assets/58599091/4bb52c2a-5238-43bb-9ff4-fa4b1fc60d85)
+
  Main page showing all the movies.
 
-![movies_1](https://github.com/HAMMAD88/web-app/assets/58599091/5b509b37-5739-444c-970b-685aa50facdb)
+ ![movies_1](https://github.com/HAMMAD88/web-app/assets/58599091/3384b3da-afcc-4d72-a340-28d231bf091e)
+
 User can add a new movie along with other details and poster.
 
-![movies_2](https://github.com/HAMMAD88/web-app/assets/58599091/f051e34d-5777-4ae3-af69-de7d31f90fc9)
+ ![movies_2](https://github.com/HAMMAD88/web-app/assets/58599091/f8dff6eb-7b61-4441-a68f-583486580aa1)
+
 
 By clicking on the movie a new page showing all the comments on existing movies show up. User can interact with already present comments(like or dislike) or they can add their own comments.
-![comments_1](https://github.com/HAMMAD88/web-app/assets/58599091/0f5f3bf1-61d6-49b7-81f1-2499f7a3b3e3)
+![comments_1](https://github.com/HAMMAD88/web-app/assets/58599091/59c66e5e-a71f-484c-9ea7-6f1b53400710)
+
 User can only update their own comments only.
 
-![comments_2](https://github.com/HAMMAD88/web-app/assets/58599091/704ed591-d642-4e8f-9237-1843b47c2bcd)
+![comments_2](https://github.com/HAMMAD88/web-app/assets/58599091/7b3ed005-7f3c-4a65-b79f-9e5ad1cd1aff)
+
 
 
 
